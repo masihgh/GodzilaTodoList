@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.divider{
+    @apply font-extrabold text-xl;
+}
+.tasks{
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5;
+}
+.task{
+    @apply card bg-neutral;
+}
+.task-body{
+    @apply p-3;
+}
