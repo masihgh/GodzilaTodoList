@@ -1,10 +1,11 @@
+import MainLayout from "./layouts/MainLayout"
 
 function App() {
 
   return (
-    <div className="App">
-      
-    </div>
+    <MainLayout>
+      <button class="btn">Button</button>
+    </MainLayout>
   )
 }
 
