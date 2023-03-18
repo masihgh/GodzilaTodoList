@@ -25,7 +25,7 @@ function Home() {
 
         <input type="checkbox" id="modal-create-task" className="modal-toggle" />
         <div className="modal">
-          <div className="modal-box relative bg-base-200">
+          <div className="modal-box relative bg-base-200 h-full">
             <label htmlFor="modal-create-task" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
             <h3 className="text-lg font-bold">Create Task</h3>
             <div className="py-4">
