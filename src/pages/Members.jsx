@@ -1,7 +1,27 @@
+import React, { useState } from "react";
 import MainLayout from "../layouts/MainLayout"
 
 function Members() {
+  const [memberData, setMemberData] = useState({
+    name: "",
+    age: "",
+    github: "",
+    linkedin: "",
+    avatar: "",
+    language: "",
+    skills: {},
+  });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // const data = new FormData();
+    // data.append('file', memberData.avatar)
+    // console.warn(memberData.avatar);
+    // let url = "http://localhost:8000/upload.php";
 
+    // axios.post(url, data, { // receive two parameter endpoint url ,form data 
+    // })
+  };
+  
   return (
     <MainLayout>
       <div className="card bg-base-300 shadow-xl p-8 ">
@@ -25,47 +45,47 @@ function Members() {
             <label htmlFor="modal-new-member" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
             <h3 className="text-lg font-bold">Create New Member</h3>
             <div className="py-4">
-              <form action="">
+              <form onSubmit={handleSubmit}>
                 <div className="form-control w-full mb-4">
                   <label className="label">
                     <span className="label-text">Name</span>
                   </label>
-                  <input type="text" placeholder="Type here" className="input input-bordered w-full" />
+                  <input onChange={(e) => setMemberData({ ...memberData, name: e.target.value })} type="text" placeholder="Type here" className="input input-bordered w-full" />
                 </div>
                 <div className="form-control w-full mb-4">
                   <label className="label">
                     <span className="label-text">Age</span>
                   </label>
-                  <input type="text" placeholder="Type here" className="input input-bordered w-full" />
+                  <input onChange={(e) => setMemberData({ ...memberData, age: e.target.value })} type="text" placeholder="Type here" className="input input-bordered w-full" />
                 </div>
                 <div className="form-control w-full mb-4">
                   <label className="label">
                     <span className="label-text">Github Profile</span>
                   </label>
-                  <input type="text" placeholder="Type here" className="input input-bordered w-full" />
+                  <input onChange={(e) => setMemberData({ ...memberData, github: e.target.value })} type="text" placeholder="Type here" className="input input-bordered w-full" />
                 </div>
                 <div className="form-control w-full mb-4">
                   <label className="label">
                     <span className="label-text">Linkedin Profile</span>
                   </label>
-                  <input type="text" placeholder="Type here" className="input input-bordered w-full" />
+                  <input onChange={(e) => setMemberData({ ...memberData, linkedin: e.target.value })} type="text" placeholder="Type here" className="input input-bordered w-full" />
                 </div>
                 <div className="form-control w-full mb-4">
                   <label className="label">
                     <span className="label-text">Avatar Photo</span>
                   </label>
-                  <input type="file" className="file-input file-input-bordered w-full" />
+                  <input onChange={(e) => setMemberData({ ...memberData, avatar: e.target.files[0] })} type="file" className="file-input file-input-bordered w-full" />
                 </div>
                 <div className="form-control">
                   <label className="label cursor-pointer">
                     <span className="label-text">English</span>
-                    <input type="radio" name="radio-10" className="radio checked:bg-secondary" checked />
+                    <input onChange={() => setMemberData({ ...memberData, language: 'english' })} type="radio" name="radio-10" className="radio checked:bg-secondary" checked />
                   </label>
                 </div>
                 <div className="form-control mb-4">
                   <label className="label cursor-pointer">
                     <span className="label-text">Persian</span>
-                    <input type="radio" name="radio-10" className="radio checked:bg-secondary" checked />
+                    <input onChange={() => setMemberData({ ...memberData, language: 'persian' })} type="radio" name="radio-10" className="radio checked:bg-secondary" checked />
                   </label>
                 </div>
                 <div className="form-control mb-4">
