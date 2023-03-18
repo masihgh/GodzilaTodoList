@@ -47,7 +47,7 @@ function Members() {
             <div className="member-body">
               <div className="flex items-center space-x-3">
                 <div className="avatar">
-                  <div className="mask mask-squircle w-12 h-12">
+                  <div className="mask mask-squircle w-24 h-24">
                     <img src="https://daisyui.com/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
                   </div>
                 </div>
