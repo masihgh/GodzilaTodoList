@@ -1,6 +1,16 @@
+import React, { useState } from "react";
 import MainLayout from "../layouts/MainLayout"
 
 function Home() {
+  const [User, setUser] = useState('Select User');
+  const [taskData, setTaskData] = useState({
+    task: "",
+    user: "",
+  });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+  };
 
   return (
     <MainLayout>
@@ -19,21 +29,24 @@ function Home() {
             <label htmlFor="modal-create-task" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
             <h3 className="text-lg font-bold">Create Task</h3>
             <div className="py-4">
-              <form action="">
+              <form onSubmit={handleSubmit}>
                 <div className="form-control w-full mb-4">
                   <label className="label">
                     <span className="label-text">Task</span>
                   </label>
-                  <input type="text" placeholder="Type here" className="input input-bordered w-full" />
+                  <input onChange={(e) => setTaskData({ ...taskData, task: e.target.value })} type="text" placeholder="Type here" className="input input-bordered w-full" />
                 </div>
                 <div className="form-control w-full mb-4">
                   <label className="label">
                     <span className="label-text">User Asign</span>
                   </label>
                   <div class="dropdown">
-                    <label tabindex="0" class="btn m-1">Select User</label>
+                    <label tabindex="0" class="btn m-1">{User}</label>
                     <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-neutral rounded-box w-52">
-                      <li>
+                      <li onClick={(e) => {
+                        setTaskData({ ...taskData, user: "2" })
+                        setUser('Masih Gh')
+                      }}>
                         <div>
                           <div className="avatar">
                             <div className="w-8 mask mask-squircle">
@@ -43,7 +56,10 @@ function Home() {
                           <p class="font-bold">Masih Gh</p>
                         </div>
                       </li>
-                      <li>
+                      <li onClick={(e) => {
+                        setTaskData({ ...taskData, user: "2" })
+                        setUser('Masih Gh')
+                      }}>
                         <div>
                           <div className="avatar placeholder">
                             <div class="bg-neutral-focus text-neutral-content w-8 mask mask-squircle">
@@ -52,6 +68,20 @@ function Home() {
 
                           </div>
                           <p class="font-bold">Masih Gh</p>
+                        </div>
+                      </li>
+                      <li onClick={(e) => {
+                        setTaskData({ ...taskData, user: "" })
+                        setUser('Select User')
+                      }}>
+                        <div>
+                          <div className="avatar placeholder">
+                            <div class="bg-error-content text-neutral-content w-8 mask mask-squircle">
+                              <span class="text-xs">X</span>
+                            </div>
+
+                          </div>
+                          <p class="font-bold">Clear</p>
                         </div>
                       </li>
                     </ul>
