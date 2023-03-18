@@ -21,7 +21,7 @@ function Members() {
     // axios.post(url, data, { // receive two parameter endpoint url ,form data 
     // })
   };
-  
+
   return (
     <MainLayout>
       <div className="card bg-base-300 shadow-xl p-8 ">
@@ -40,42 +40,66 @@ function Members() {
 
       </div>
       <input type="checkbox" id="modal-new-member" className="modal-toggle" />
-        <div className="modal">
-          <div className="modal-box relative bg-base-200">
-            <label htmlFor="modal-new-member" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-            <h3 className="text-lg font-bold">Create New Member</h3>
-            <div className="py-4">
-              <form onSubmit={handleSubmit}>
-                <div className="form-control w-full mb-4">
-                  <label className="label">
-                    <span className="label-text">Name</span>
-                  </label>
-                  <input onChange={(e) => setMemberData({ ...memberData, name: e.target.value })} type="text" placeholder="Type here" className="input input-bordered w-full" />
+      <div className="modal">
+        <div className="modal-box relative bg-base-200">
+          <label htmlFor="modal-new-member" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+          <h3 className="text-lg font-bold">Create New Member</h3>
+          <div className="py-4">
+            <form onSubmit={handleSubmit}>
+              <div className="form-control w-full mb-4">
+                <label className="label">
+                  <span className="label-text">Name</span>
+                </label>
+                <input onChange={(e) => setMemberData({ ...memberData, name: e.target.value })} type="text" placeholder="Type here" className="input input-bordered input-sm w-full" />
+              </div>
+              <div className="form-control w-full mb-4">
+                <label className="label">
+                  <span className="label-text">Age</span>
+                </label>
+                <input onChange={(e) => setMemberData({ ...memberData, age: e.target.value })} type="text" placeholder="Type here" className="input input-bordered input-sm w-full" />
+              </div>
+              <div className="form-control w-full mb-4">
+                <label className="label">
+                  <span className="label-text">Github Profile</span>
+                </label>
+                <input onChange={(e) => setMemberData({ ...memberData, github: e.target.value })} type="text" placeholder="Type here" className="input input-bordered input-sm w-full" />
+              </div>
+              <div className="form-control w-full mb-4">
+                <label className="label">
+                  <span className="label-text">Linkedin Profile</span>
+                </label>
+                <input onChange={(e) => setMemberData({ ...memberData, linkedin: e.target.value })} type="text" placeholder="Type here" className="input input-bordered input-sm w-full" />
+              </div>
+              <div className="form-control w-full mb-4">
+                <label className="label">
+                  <span className="label-text">Avatar Photo</span>
+                </label>
+                <input onChange={(e) => setMemberData({ ...memberData, avatar: e.target.files[0] })} type="file" className="file-input file-input-bordered file-input-sm w-full" />
+              </div>
+              <div className="form-control w-full mb-6">
+                <label className="label">
+                  <span className="label-text">Skills</span>
+                </label>
+                <label class="input-group">
+                  <button className="btn-primary btn btn-sm">Add</button>
+                  <input type="text" placeholder="info@site.com" class="input input-bordered input-sm w-full" />
+                </label>
+              </div>
+              <div className="mb-6 gap-3">
+                <div className="badge badge-primary gap-2 mr-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-4 h-4 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  info
                 </div>
-                <div className="form-control w-full mb-4">
-                  <label className="label">
-                    <span className="label-text">Age</span>
-                  </label>
-                  <input onChange={(e) => setMemberData({ ...memberData, age: e.target.value })} type="text" placeholder="Type here" className="input input-bordered w-full" />
+                <div className="badge badge-primary gap-2 mr-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-4 h-4 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  success
                 </div>
-                <div className="form-control w-full mb-4">
-                  <label className="label">
-                    <span className="label-text">Github Profile</span>
-                  </label>
-                  <input onChange={(e) => setMemberData({ ...memberData, github: e.target.value })} type="text" placeholder="Type here" className="input input-bordered w-full" />
-                </div>
-                <div className="form-control w-full mb-4">
-                  <label className="label">
-                    <span className="label-text">Linkedin Profile</span>
-                  </label>
-                  <input onChange={(e) => setMemberData({ ...memberData, linkedin: e.target.value })} type="text" placeholder="Type here" className="input input-bordered w-full" />
-                </div>
-                <div className="form-control w-full mb-4">
-                  <label className="label">
-                    <span className="label-text">Avatar Photo</span>
-                  </label>
-                  <input onChange={(e) => setMemberData({ ...memberData, avatar: e.target.files[0] })} type="file" className="file-input file-input-bordered w-full" />
-                </div>
+                
+              </div>
+              <div className="form-control w-full mb-4">
+                <label className="label">
+                  <span className="label-text">Language</span>
+                </label>
                 <div className="form-control">
                   <label className="label cursor-pointer">
                     <span className="label-text">English</span>
@@ -85,16 +109,17 @@ function Members() {
                 <div className="form-control mb-4">
                   <label className="label cursor-pointer">
                     <span className="label-text">Persian</span>
-                    <input onChange={() => setMemberData({ ...memberData, language: 'persian' })} type="radio" name="radio-10" className="radio checked:bg-secondary" checked />
+                    <input onChange={() => setMemberData({ ...memberData, language: 'persian' })} type="radio" name="radio-10" className="radio checked:bg-secondary" />
                   </label>
                 </div>
-                <div className="form-control mb-4">
-                  <button className="btn btn-secondary">Create</button>
-                </div>
-              </form>
-            </div>
+              </div>
+              <div className="form-control mb-4">
+                <button className="btn btn-secondary">Create</button>
+              </div>
+            </form>
           </div>
         </div>
+      </div>
 
     </MainLayout>
   )
