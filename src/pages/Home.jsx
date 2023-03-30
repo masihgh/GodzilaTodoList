@@ -120,7 +120,7 @@ function Home() {
             </div>
           </div>
         </div>
-        <Title value={122} title="Tasks" />
+        <Title value={Tasks.length} title="Tasks" />
         <div className="overflow-x-auto">
           <table className="table table-zebra w-full">
             {/* head */}
