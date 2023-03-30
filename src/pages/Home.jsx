@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from "react";
 import Title from "../components/Title";
 import MainLayout from "../layouts/MainLayout"
-
+import config from "../config";
 function Home() {
   const [User, setUser] = useState({ name: 'Selcted User', avatar: '' });
   const [Users, setUsers] = useState([]);
