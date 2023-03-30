@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import History from './pages/History';
 import Members from './pages/Members';
 import './assets/App.css'
+import Auth from './pages/Auth';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,9 @@ const router = createBrowserRouter([
   },{
     path: "members/",
     element: <Members />,
+  },{
+    path: "auth/",
+    element: <Auth />,
   },
 ]);
 
