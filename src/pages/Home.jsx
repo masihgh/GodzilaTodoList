@@ -85,6 +85,7 @@ function Home() {
 
                       <li onClick={(e) => {
                         setUser({ name: 'Select User' })
+                        setTaskData({ ...taskData, user: "" })
                       }}>
                         <div>
                           <div className="avatar placeholder">
