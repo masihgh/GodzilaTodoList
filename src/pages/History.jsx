@@ -46,7 +46,7 @@ function History() {
                   
                   <div>
                     <h3 className="font-bold">
-                      A {history.action} {history.type}ed!
+                      A {history.action} {history.type}d!
                     </h3>
                     <div className="text-xs">By User: {history.payload && history.payload[1]}</div>
                   </div>
