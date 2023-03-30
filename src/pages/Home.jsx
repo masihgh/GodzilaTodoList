@@ -7,6 +7,7 @@ import config from "../config";
 function Home() {
   const [User, setUser] = useState({ name: 'Selcted User', avatar: '' });
   const [Users, setUsers] = useState([]);
+  const [Tasks, setTasks] = useState([]);
   const [taskData, setTaskData] = useState({
     task: "",
     user: "",
@@ -36,6 +37,7 @@ function Home() {
         console.log(error);
       })
   }, []);
+
   return (
     <MainLayout>
       <div className="card bg-base-300 shadow-xl p-8 ">
