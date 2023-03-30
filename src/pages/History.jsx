@@ -1,6 +1,7 @@
 import MainLayout from "../layouts/MainLayout"
 import getAllHistory from "../api/HistoryAPI"
 import React, { useState, useEffect } from "react";
+import Title from "../components/Title";
 
 function History() {
   const [Histories, setHistories] = useState([]);
@@ -34,7 +35,7 @@ function History() {
     <MainLayout>
 
       <div className="card bg-base-300 shadow-xl p-8 ">
-        <div className="divider">History</div>
+        <Title value={Histories.length} title="Histories"/>
         <div>
           {Histories && Histories.map((history, index) => {
             return (
