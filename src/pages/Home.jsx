@@ -70,6 +70,7 @@ function Home() {
                         return (
                           <li key={index} onClick={(e) => {
                             setUser({ name: user.name, avatar: user.avatar })
+                            setTaskData({ ...taskData, user: user.id })
                           }}>
                             <div>
                               <div className="avatar">
