@@ -119,18 +119,20 @@ function Home() {
               </tr>
             </thead>
             <tbody>
-              {/* row 1 */}
-              <tr>
+              {Users && Users.map((user, index) => {
+                return (
+                 
+                  <tr >
                 <td>
                   <div className="flex items-center space-x-3">
                     <div className="avatar">
                       <div className="mask mask-squircle w-12 h-12">
-                        <img src="https://daisyui.com/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
+                      <img src={`${config.FILES_ENDPOINT}${user.avatar}`} alt={`User ${user.avatar} Photo`} />
                       </div>
                     </div>
                     <div>
-                      <div className="font-bold">Hart Hagerty</div>
-                      <div className="text-sm opacity-50">United States</div>
+                      <div className="font-bold">{user.name}</div>
+                      <div className="text-sm opacity-50">{user.is_admin}</div>
                     </div>
                   </div>
                 </td>
@@ -183,15 +185,16 @@ function Home() {
                     </div>
                   </section>
                 </td>
-              </tr>
+              </tr>)
+            })}
 
-            </tbody>
-          </table>
-        </div>
-
+          </tbody>
+        </table>
       </div>
 
-    </MainLayout>
+    </div>
+
+    </MainLayout >
   )
 }
 
