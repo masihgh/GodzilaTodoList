@@ -3,7 +3,8 @@ import Title from "../components/Title";
 import MainLayout from "../layouts/MainLayout"
 
 function Home() {
-  const [User, setUser] = useState('Select User');
+  const [User, setUser] = useState({ name: 'Selcted User', avatar: '' });
+  const [Users, setUsers] = useState([]);
   const [taskData, setTaskData] = useState({
     task: "",
     user: "",
@@ -92,7 +93,7 @@ function Home() {
             </div>
           </div>
         </div>
-        <Title value={122} title="Tasks"/>
+        <Title value={122} title="Tasks" />
         <div className="overflow-x-auto">
           <table className="table table-zebra w-full">
             {/* head */}
