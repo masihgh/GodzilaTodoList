@@ -31,7 +31,7 @@ function Auth() {
             return (
                 <div className="avatar">
                     <div className="w-8 mask mask-squircle">
-                        <img src={`${config.FILES_ENDPOINT}${User.avatar}`} alt={`User $(User.avatar) Photo`} />
+                        <img src={`${config.FILES_ENDPOINT}${User.avatar}`} alt={`User ${User.avatar} Photo`} />
                     </div>
                 </div>
             )
@@ -67,7 +67,7 @@ function Auth() {
                                 <p className="font-bold ml-3">{User.name}</p>
                             </label>
                             <ul tabindex="0" className="dropdown-content menu p-2 shadow bg-neutral rounded-box w-52">
-                                {User && Users.map((user, index) => {
+                                {Users && Users.map((user, index) => {
                                     return (
                                         <li key={index} onClick={(e) => {
                                             setUser({ name: user.name, avatar: user.avatar })
@@ -75,7 +75,7 @@ function Auth() {
                                             <div>
                                                 <div className="avatar">
                                                     <div className="w-8 mask mask-squircle">
-                                                        <img src={`${config.FILES_ENDPOINT}${user.avatar}`} alt="Tailwind-CSS-Avatar-component" />
+                                                        <img src={`${config.FILES_ENDPOINT}${user.avatar}`} alt={`User ${user.avatar} Photo`} />
                                                     </div>
                                                 </div>
                                                 <p className="font-bold">{user.name}</p>
