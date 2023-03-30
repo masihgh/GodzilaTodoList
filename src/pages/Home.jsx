@@ -13,7 +13,28 @@ function Home() {
     e.preventDefault();
 
   };
+  const AvatarSet = () => {
+    if (User.avatar) {
+        return (
+            <div className="avatar">
+                <div className="w-8 mask mask-squircle">
+                    <img src={`${config.FILES_ENDPOINT}${User.avatar}`} alt={`User ${User.avatar} Photo`} />
+                </div>
+            </div>
+        )
+    }
+}
 
+useEffect(() => {
+    getAllMembers()
+        .then(({ data }) => {
+            setUsers(data)
+            console.log(data);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+}, []);
   return (
     <MainLayout>
       <div className="card bg-base-300 shadow-xl p-8 ">
