@@ -5,8 +5,7 @@ const API_URL = "/auth";
 const login = (name) => {
     return API
         .post(API_URL + "/login", {
-            name,
-            password,
+            name: name,
         })
         .then((response) => {
             if (response.data.token) {
