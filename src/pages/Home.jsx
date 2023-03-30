@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Title from "../components/Title";
 import MainLayout from "../layouts/MainLayout"
 import { getAllMembers } from "../api/MemberAPI"
-import {getAllTasks} from "../api/TaskAPI"
+import { getAllTasks } from "../api/TaskAPI"
 import config from "../config";
 
 function Home() {
@@ -30,7 +30,7 @@ function Home() {
   }
 
   useEffect(() => {
-    getAllTasks()
+    getAllMembers()
       .then(({ data }) => {
         setUsers(data)
       })
@@ -40,7 +40,7 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    getAllMembers()
+    getAllTasks()
       .then(({ data }) => {
         setTasks(data)
       })
