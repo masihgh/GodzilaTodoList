@@ -1,8 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { getAllMembers } from "../api/MemberAPI";
 import { Skills } from "../features/members/Skills";
 import MainLayout from "../layouts/MainLayout"
-
+import config from "../config";
 function Members() {
+  const [Users, setUsers] = useState([]);
+  useEffect(() => {
+    getAllMembers()
+      .then(({ data }) => {
+        setUsers(data)
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }, []);
 
   const [memberData, setMemberData] = useState({
     name: "",
@@ -45,46 +57,50 @@ function Members() {
           </button>
           <button className="btn gap-2">
             Members
-            <div className="badge badge-secondary">12</div>
+            <div className="badge badge-secondary">{Users.length}</div>
           </button>
           <label htmlFor="modal-new-member" className="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 25 25" strokeWidth={1.8} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg> Create New Member</label>
         </section>
         <div className="divider">Members</div>
         <div className="members">
-          <div className="member">
-            <div className="member-body">
-              <div className="flex items-center space-x-3">
-                <div className="avatar">
-                  <div className="mask mask-squircle w-24 h-24">
-                    <img src="https://daisyui.com/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
+          {Users && Users.map((user, index) => {
+            return (
+              <div className="member" key={index}>
+                <div className="member-body">
+                  <div className="flex items-center space-x-3">
+                    <div className="avatar">
+                      <div className="mask mask-squircle w-24 h-24">
+                        <img src={`${config.FILES_ENDPOINT}${user.avatar}`} alt={`User ${user.avatar} Photo`} />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-bold">{user.name}</div>
+                      <div className=""><span className="text-sm opacity-50">Age: </span><span className="text-sm opacity-100">{user.age}</span></div>
+                      <div className=""><span className="text-sm opacity-50">Github: </span><span className="text-sm opacity-100"> <br /> {user.github}</span></div>
+                      <div className=""><span className="text-sm opacity-50">Linkedin: </span><span className="text-sm opacity-100"> <br />{user.linkedin}</span></div>
+                      <div className=""><span className="text-sm opacity-50">Language: </span><span className="text-sm opacity-100">{user.language}</span></div>
+                    </div>
+                  </div>
+                  <div className="my-3">
+                    <div className="text-sm opacity-50">Skills:</div>
+                    <div className="badge badge-ghost mr-2 mb-2">react</div>
+                    <div className="badge badge-ghost mr-2 mb-2">react</div>
+                    <div className="badge badge-ghost mr-2 mb-2">react</div>
+                    <div className="badge badge-ghost mr-2 mb-2">react</div>
+                  </div>
+                  <div className="my-3">
+                    <div className="text-sm opacity-50">Tasks:</div>
+                    <div className="badge badge-primary mr-2 mb-2">react</div>
+                    <div className="badge badge-primary mr-2 mb-2">react</div>
+                    <div className="badge badge-primary mr-2 mb-2">react</div>
+                    <div className="badge badge-primary mr-2 mb-2">react</div>
+                    <div className="badge badge-primary mr-2 mb-2">react</div>
+                    <div className="badge badge-primary mr-2 mb-2">react</div>
                   </div>
                 </div>
-                <div>
-                  <div className="font-bold">Hart Hagerty</div>
-                  <div className=""><span className="text-sm opacity-50">Age: </span><span className="text-sm opacity-100">15</span></div>
-                  <div className=""><span className="text-sm opacity-50">Github: </span><span className="text-sm opacity-100">Masihgh</span></div>
-                  <div className=""><span className="text-sm opacity-50">Linkedin: </span><span className="text-sm opacity-100">MasihGh</span></div>
-                  <div className=""><span className="text-sm opacity-50">Language: </span><span className="text-sm opacity-100">Fa</span></div>
-                </div>
               </div>
-              <div className="my-3">
-                <div className="text-sm opacity-50">Skills:</div>
-                <div className="badge badge-ghost mr-2 mb-2">react</div>
-                <div className="badge badge-ghost mr-2 mb-2">react</div>
-                <div className="badge badge-ghost mr-2 mb-2">react</div>
-                <div className="badge badge-ghost mr-2 mb-2">react</div>
-              </div>
-              <div className="my-3">
-                <div className="text-sm opacity-50">Tasks:</div>
-                <div className="badge badge-primary mr-2 mb-2">react</div>
-                <div className="badge badge-primary mr-2 mb-2">react</div>
-                <div className="badge badge-primary mr-2 mb-2">react</div>
-                <div className="badge badge-primary mr-2 mb-2">react</div>
-                <div className="badge badge-primary mr-2 mb-2">react</div>
-                <div className="badge badge-primary mr-2 mb-2">react</div>
-              </div>
-            </div>
-          </div>
+          )})}
+
         </div>
       </div>
       <input type="checkbox" id="modal-new-member" className="modal-toggle" />
