@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Title from "../components/Title";
 import MainLayout from "../layouts/MainLayout"
 import config from "../config";
@@ -29,7 +29,6 @@ function Home() {
     getAllMembers()
       .then(({ data }) => {
         setUsers(data)
-        console.log(data);
       })
       .catch((error) => {
         console.log(error);
@@ -60,38 +59,29 @@ function Home() {
                     <span className="label-text">User Asign</span>
                   </label>
                   <div className="dropdown">
-                    <label tabindex="0" className="btn m-1">{User}</label>
+                    <label tabindex="0" className="btn m-1 px-12">
+                      {AvatarSet()}
+                      <p className="font-bold ml-3">{User.name}</p>
+                    </label>
                     <ul tabindex="0" className="dropdown-content menu p-2 shadow bg-neutral rounded-box w-52">
-                      <li onClick={(e) => {
-                        setTaskData({ ...taskData, user: "2" })
-                        setUser('Masih Gh')
-                      }}>
-                        <div>
-                          <div className="avatar">
-                            <div className="w-8 mask mask-squircle">
-                              <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt="Tailwind-CSS-Avatar-component" />
+                      {Users && Users.map((user, index) => {
+                        return (
+                          <li key={index} onClick={(e) => {
+                            setUser({ name: user.name, avatar: user.avatar })
+                          }}>
+                            <div>
+                              <div className="avatar">
+                                <div className="w-8 mask mask-squircle">
+                                  <img src={`${config.FILES_ENDPOINT}${user.avatar}`} alt={`User ${user.avatar} Photo`} />
+                                </div>
+                              </div>
+                              <p className="font-bold">{user.name}</p>
                             </div>
-                          </div>
-                          <p className="font-bold">Masih Gh</p>
-                        </div>
-                      </li>
-                      <li onClick={(e) => {
-                        setTaskData({ ...taskData, user: "2" })
-                        setUser('Masih Gh')
-                      }}>
-                        <div>
-                          <div className="avatar placeholder">
-                            <div className="bg-neutral-focus text-neutral-content w-8 mask mask-squircle">
-                              <span className="text-xs">MG</span>
-                            </div>
+                          </li>)
+                      })}
 
-                          </div>
-                          <p className="font-bold">Masih Gh</p>
-                        </div>
-                      </li>
                       <li onClick={(e) => {
-                        setTaskData({ ...taskData, user: "" })
-                        setUser('Select User')
+                        setUser({ name: 'Select User' })
                       }}>
                         <div>
                           <div className="avatar placeholder">
