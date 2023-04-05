@@ -33,7 +33,7 @@ function TaskTableList({ Users, Tasks }) {
                                     <td>
                                         <section className="tasks">
                                             {Tasks && Tasks.filter((t) => {
-                                                return t.AsignedUser == user.id;
+                                                return t.AsignedUser == user._id;
                                             }).map((task, index) => {
                                                 return (
                                                     <div className="task" key={index}>
@@ -49,7 +49,6 @@ function TaskTableList({ Users, Tasks }) {
                                                     </div>
                                                 )
                                             })}
-
                                         </section>
                                     </td>
                                 </tr>
@@ -59,10 +58,10 @@ function TaskTableList({ Users, Tasks }) {
                 </table>
             </div>
             <div className="mt-8">
-            <Title value={Tasks.length} title="Unassigned Tasks" />
+            <Title value={''} title="Unassigned Tasks" />
                 <section className="tasks">
                     {Tasks && Tasks.filter((t) => {
-                        return Users.map((user) => user._id).includes(t.AsignedUser);
+                        return !Users.map((user) => user._id).includes(t.AsignedUser);
                     }).map((task, index) => {
                         return (
                             <div className="task" key={index}>
@@ -78,8 +77,6 @@ function TaskTableList({ Users, Tasks }) {
                             </div>
                         )
                     })}
-
-
                 </section>
             </div>
         </>
