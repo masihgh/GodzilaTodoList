@@ -37,7 +37,7 @@ function History() {
       <div className="card bg-base-300 shadow-xl p-8 ">
         <Title value={Histories.length} title="Histories"/>
         <div>
-          {Histories && Histories.map((history, index) => {
+          {Histories && Histories.reverse().map((history, index) => {
             return (
 
               <div key={index} className="alert shadow-lg mt-5">
@@ -46,9 +46,9 @@ function History() {
                   
                   <div>
                     <h3 className="font-bold">
-                      A {history.action} {history.type}d!
+                      "{history.payload && history.payload[1]}" {history.action} {history.type}d!
                     </h3>
-                    <div className="text-xs">By User: {history.payload && history.payload[1]}</div>
+                    <div className="text-xs">By User: {history.user}</div>
                   </div>
                 </div>
               </div>

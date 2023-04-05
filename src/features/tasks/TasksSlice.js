@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export const TasksSlice = createSlice({
-  name: 'skills',
+  name: 'tasks',
   initialState: {
     value: [],
   },
