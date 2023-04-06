@@ -2,6 +2,7 @@ import MainLayout from "../layouts/MainLayout"
 import getAllHistory from "../api/HistoryAPI"
 import React, { useState, useEffect } from "react";
 import Title from "../components/Title";
+import { toast } from 'react-toastify';
 
 function History() {
   const [Histories, setHistories] = useState([]);
@@ -9,10 +10,10 @@ function History() {
     getAllHistory()
       .then(({ data }) => {
         setHistories(data)
-        console.log(data);
+        toast.success('Loaded!')
       })
       .catch((error) => {
-        console.log(error);
+        toast.error('Faild Load Data From Server.')
       })
   }, []);
   const actionType = (type) => {
@@ -33,7 +34,6 @@ function History() {
   }
   return (
     <MainLayout>
-
       <div className="card bg-base-300 shadow-xl p-8 ">
         <Title value={Histories.length} title="Histories"/>
         <div>

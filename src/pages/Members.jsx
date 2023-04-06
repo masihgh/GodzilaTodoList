@@ -105,9 +105,9 @@ function Members() {
                   </div>
                   <div className="my-3">
                     <div className="text-sm opacity-50">Skills:</div>
-                    {user.skills && user.skills.map((skill) => {
+                    {user.skills && user.skills.map((skill,i) => {
                       return (
-                        <div className="badge badge-ghost mr-2 mb-2">{skill}</div>
+                        <div key={i} className="badge badge-ghost mr-2 mb-2">{skill}</div>
                       )
                     })
                     }
