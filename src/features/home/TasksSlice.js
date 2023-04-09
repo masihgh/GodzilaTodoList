@@ -33,10 +33,22 @@ export const TasksSlice = createSlice({
       });
       return state
     },
+    editTask: (state, action) => {
+      state.tasks = state.tasks.map((todo) => {
+        if (todo._id === action.payload._id) {
+          return {
+            ...action.payload
+          };
+        }
+        return todo;
+      });
+      return state
+    },
+
   },
 })
 
-export const { addTasks,addTask,removeTask,completeTask } = TasksSlice.actions;
+export const { addTasks,addTask,removeTask,completeTask,editTask } = TasksSlice.actions;
 
 
 

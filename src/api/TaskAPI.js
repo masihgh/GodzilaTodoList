@@ -12,6 +12,10 @@ export const DeleteTask = async (id) => {
     return API.delete(API_URL + "/"+ id, { headers: authHeader() });
 };
 
+export const EditTask = async (id,todo) => {
+    return API.patch(API_URL + "/"+ id,todo, { headers: authHeader() });
+};
+
 export const CompleteTaskUp = async (id,todo) => {
     return API.patch(API_URL + "/"+ id,todo, { headers: authHeader() });
 };

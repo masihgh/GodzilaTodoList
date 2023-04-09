@@ -108,11 +108,11 @@ function Home() {
                     <span className="label-text">User Asign</span>
                   </label>
                   <div className="dropdown">
-                    <label tabindex="0" className="btn m-1 px-12">
+                    <label tabIndex="10" className="btn m-1 px-12">
                       {AvatarSet()}
                       <p className="font-bold ml-3">{User.name}</p>
                     </label>
-                    <ul tabindex="0" className="dropdown-content menu p-2 shadow bg-neutral rounded-box w-52">
+                    <ul tabIndex="10" className="dropdown-content menu p-2 shadow bg-neutral rounded-box w-52">
                       {Users && Users.map((user, index) => {
                         return (
                           <li key={index} onClick={(e) => {
