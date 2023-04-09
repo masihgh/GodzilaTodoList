@@ -18,10 +18,10 @@ export function Skills() {
                     <span className="label-text">Skills</span>
                 </label>
                 <label className="input-group">
-                    <button className="btn-primary btn btn-sm" onClick={() =>{
+                    <a className="btn-primary btn btn-sm" onClick={() =>{
                         dispatch(incrementByAmount(NewSkill))
                         setNewSkill('')}
-                    }>Add</button>
+                    }>Add</a>
                     <input type="text" value={NewSkill} onChange={e => setNewSkill(e.target.value)} className="input input-bordered input-sm w-full" />
                 </label>
             </div>

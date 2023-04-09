@@ -1,25 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { getAllMembers } from "../api/MemberAPI";
+import { CreateMember, getAllMembers, DeleteMember } from "../api/MemberAPI";
 import { Skills } from "../features/members/Skills";
 import MainLayout from "../layouts/MainLayout"
 import config from "../config";
 import Title from "../components/Title";
-
+import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   addMembers,
   addMember,
+  removeMember,
   MemberList
 } from '../features/members/membersSlice';
 import { getAllTasks } from "../api/TaskAPI";
+import { selectCount } from "../features/members/skillsSlice";
 
 
 function Members() {
   const users = useSelector(MemberList);
+  const skills = useSelector(selectCount);
   const dispatch = useDispatch();
 
   const [Tasks, setTasks] = useState([]);
   const [Query, setQuery] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
 
   useEffect(() => {
     getAllTasks()
@@ -46,24 +50,49 @@ function Members() {
     age: "",
     github: "",
     linkedin: "",
-    avatar: "",
-    language: "",
-    skills: {},
+    avatarPhoto: "",
+    language: "english",
+    skills: "",
   });
-
+  const handleFileSelect = (event) => {
+    setSelectedFile(event.target.files[0])
+  }
+  console.warn("["+skills.join() + "]")
   const handleSubmit = (e) => {
-
     e.preventDefault();
-    console.log(memberData);
-    // const data = new FormData();
-    // data.append('file', memberData.avatar)
-    // console.warn(memberData.avatar);
-    // let url = "http://localhost:8000/upload.php";
+    const formData = new FormData();
+    formData.append("avatarPhoto", selectedFile);
+    formData.append("name", memberData.name);
+    formData.append("age", memberData.age);
+    formData.append("github", memberData.github);
+    formData.append("linkedin", memberData.linkedin);
+    formData.append("language", memberData.language);
+    formData.append("skills", skills.join());
 
+    CreateMember(formData)
+      .then((data) => {
+        dispatch(addMember(data.data))
+        toast.success('"' + data.data.name + '" Added Successfuly!');
+      })
+      .catch((error) => {
+        // navigate('/')
+        toast.error("Cannot Create Member! Check Items");
+      })
     // axios.post(url, data, { // receive two parameter endpoint url ,form data 
     // })
   };
+  const handleDelete = (id) => {
+    DeleteMember(id)
+      .then((data) => {
+        dispatch(removeMember(id))
+        toast.success('Delete Successfuly!');
+      })
+      .catch((error) => {
+        // navigate('/')
+        toast.error(error.response.data.msg._message);
+      })
 
+  }
   return (
     <MainLayout>
       <div className="card bg-base-300 shadow-xl p-8 ">
@@ -88,6 +117,10 @@ function Members() {
             return (
               <div className="member" key={index}>
                 <div className="member-body">
+                  <div className="mb-8">
+                    <button onClick={() => handleDelete(user._id)} className="btn btn-sm btn-error"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5"> <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" /> </svg></button>
+
+                  </div>
                   <div className="flex space-x-3 flex-col">
                     <div className="avatar">
                       <div className="mask mask-squircle w-14 h-14">
@@ -105,7 +138,7 @@ function Members() {
                   </div>
                   <div className="my-3">
                     <div className="text-sm opacity-50">Skills:</div>
-                    {user.skills && user.skills.map((skill,i) => {
+                    {user.skills[0] && user.skills[0].split(',').map((skill, i) => {
                       return (
                         <div key={i} className="badge badge-ghost mr-2 mb-2">{skill}</div>
                       )
@@ -123,6 +156,7 @@ function Members() {
                       )
                     })}
                   </div>
+
                 </div>
               </div>
             )
@@ -165,7 +199,7 @@ function Members() {
                 <label className="label">
                   <span className="label-text">Avatar Photo</span>
                 </label>
-                <input onChange={(e) => setMemberData({ ...memberData, avatar: e.target.files[0] })} type="file" className="file-input file-input-bordered file-input-sm w-full" />
+                <input onChange={handleFileSelect} type="file" className="file-input file-input-bordered file-input-sm w-full" />
               </div>
               {/* <div className="form-control w-full mb-6">
                 <label className="label">
@@ -195,13 +229,13 @@ function Members() {
                 <div className="form-control">
                   <label className="label cursor-pointer">
                     <span className="label-text">English</span>
-                    <input onChange={() => setMemberData({ ...memberData, language: 'english' })} type="radio" name="radio-10" className="radio checked:bg-secondary" checked />
+                    <input onClick={() => setMemberData({ ...memberData, language: 'english' })} type="radio" name="radio-10" className="radio checked:bg-secondary" checked />
                   </label>
                 </div>
                 <div className="form-control mb-4">
                   <label className="label cursor-pointer">
                     <span className="label-text">Persian</span>
-                    <input onChange={() => setMemberData({ ...memberData, language: 'persian' })} type="radio" name="radio-10" className="radio checked:bg-secondary" />
+                    <input onClick={() => setMemberData({ ...memberData, language: 'persian' })} type="radio" name="radio-10" className="radio checked:bg-secondary" />
                   </label>
                 </div>
               </div>

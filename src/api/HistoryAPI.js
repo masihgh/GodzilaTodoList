@@ -4,8 +4,9 @@ import authHeader from "../services/auth-header";
 
 const API_URL = "/history";
 
-const getAllHistory = () => {
+export const getAllHistory = async () => {
   return API.get(API_URL + "/", { headers: authHeader() });
 };
-
-export default getAllHistory;
+export const deleteAllHistory = async () => {
+  return API.delete(API_URL + "/deleteAll", { headers: authHeader() });
+};
