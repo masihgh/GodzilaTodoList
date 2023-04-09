@@ -57,7 +57,6 @@ function Members() {
   const handleFileSelect = (event) => {
     setSelectedFile(event.target.files[0])
   }
-  console.warn("["+skills.join() + "]")
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -152,7 +151,7 @@ function Members() {
                       return t.AsignedUser == user._id;
                     }).map((task, index) => {
                       return (
-                        <div key={index} className={`badge badge-${(task.isDone) ? 'success' : 'primary'} mr-2 mb-2`}>{task.title}</div>
+                        <div key={index} className={`badge ${(task.isDone) ? 'bg-success text-success-content' : 'badge-primary'} mr-2 mb-2`}>{task.title}</div>
                       )
                     })}
                   </div>
